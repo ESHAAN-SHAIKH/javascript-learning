@@ -1,0 +1,37 @@
+const add = (a, b) => a + b;
+const sub = (a, b) => a - b;
+const mul = (a, b) => a * b;
+const div = (a, b) => a / b;
+
+const number1 = Number(prompt("Enter the first number"));
+const number2 = Number(prompt("Enter the second number"));
+const operation = prompt("Enter the operation (+, -, *, /)");
+
+if (isNaN(number1) || isNaN(number2)) {
+  console.log("Invalid number input");
+} else {
+  switch (operation) {
+    case '+':
+      console.log(add(number1, number2));
+      break;
+
+    case '-':
+      console.log(sub(number1, number2));
+      break;
+
+    case '*':
+      console.log(mul(number1, number2));
+      break;
+
+    case '/':
+      if (number2 === 0) {
+        console.log("Cannot divide by zero");
+      } else {
+        console.log(div(number1, number2));
+      }
+      break;
+
+    default:
+      console.log("Invalid operation");
+  }
+}
