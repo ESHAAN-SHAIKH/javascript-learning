@@ -1,28 +1,36 @@
 
 const prompt = require("prompt-sync")();
-console.log(`Welcome to random number guessing game here you have to guess number ranging from 0-100
-Careful you only have 20 lives"    
+
+//MAX_LIVES  used const instead of let because we do want to create accidental bug
+const MAX_LIVES=20;
+const MIN=0;
+const MAX=100;
+
+
+console.log(` Welcome to the Random Number Guessing Game!
+Guess a number between ${MIN} and ${MAX}.
+Careful — you only have ${MAX_LIVES} lives!    
     `)
+
+
 //we used 101 because Math.random() gives value between 0-1 but 1 is not included in it
-const random_number=Math.floor(Math.random()*101);
-let n=20;
-while(n>=0){
-const user_guess=Number(prompt(`Enter the number you have ${n} lives left`));
-if(random_number==user_guess){
+const secretNumber=Math.floor(Math.random()*(MAX+1));
+let lives=MAX_LIVES;
+while(lives>0){
+const guess=Number(prompt(`Enter the number (lives left ${lives}): `));
+if(Number.isNaN(guess)){
+    console.log(`Enter a valid number between`);
+    continue;
+}
+if (guess < MIN || guess > MAX) {
+  console.log(`❌ Number must be between ${MIN} and ${MAX}`);
+  continue;
+}
+
+if(secretNumber===guess){
     console.log("Congrats you win!!!!!");
     break;
-}
-else{
-   
-    if(random_number>user_guess){
-      console.log("too low");
-    }
-    else{
-        console.log("too high");
-    }
-    
-}
-
-
-n--;
+}   
+    console.log(secretNumber>guess?`Too low`:`Too high`);
+lives--;
 }
