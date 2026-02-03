@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet"  href="style.css">
+    
 </head>
 <body><div class="maindiv">
     <h1>TEMPERATURE CONVERTER </h1>
-    <input type="number" placeholder="Enter temperature"><br>
-    <select>
-        <option value="fahrenheit">celsius to fahrenheit</option>
-        <option value="celsius">fahrenheit  to celsius</option>
+    <input type="number"  id="temp" placeholder="Enter temperature"><br>
+    <select id="unit">
+        <option value="CTOF">celsius to fahrenheit</option>
+        <option value="FTOC">fahrenheit  to celsius</option>
     </select>
+    <button type="button" onclick="convert()">Convert</button>
+    <p id="output"></p>
+    <script src="script.js"></script>
+
 </div>
 </body>
-</html>
+</html>         
