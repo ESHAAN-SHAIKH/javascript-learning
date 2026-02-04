@@ -6,6 +6,9 @@ function clock(){
     let hours=date.getHours();
     let minutes=date.getMinutes();
     let seconds=date.getSeconds();
-    document.getElementById("result").innerHTML=`${hours} :${minutes} : ${seconds} `
+    document.getElementById("box1").innerText=`${hours} `
+    document.getElementById("box2").innerText=`${minutes} `
+    document.getElementById("box3").innerText=`${seconds} `
+
 }
 setInterval(clock,1000);
