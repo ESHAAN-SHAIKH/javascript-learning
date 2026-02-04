@@ -1,14 +1,16 @@
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
 
+function updateClock() {
+  const now = new Date();
 
-
-function clock(){
-    let date = new Date();
-    let hours=date.getHours();
-    let minutes=date.getMinutes();
-    let seconds=date.getSeconds();
-    document.getElementById("box1").innerText=`${hours} `
-    document.getElementById("box2").innerText=`${minutes} `
-    document.getElementById("box3").innerText=`${seconds} `
-
+  hoursEl.textContent = String(now.getHours()).padStart(2, "0");
+  minutesEl.textContent = String(now.getMinutes()).padStart(2, "0");
+  secondsEl.textContent = String(now.getSeconds()).padStart(2, "0");
 }
-setInterval(clock,1000);
+
+
+updateClock();
+
+setInterval(updateClock, 1000);
