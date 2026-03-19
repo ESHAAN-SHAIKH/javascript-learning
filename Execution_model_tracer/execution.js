@@ -42,3 +42,56 @@ function demonstrateReferences(){
   console.log("Changing obj2 DID affect obj1 because objects are shared by reference.");
 }
 demonstrateReferences();
+
+const leakyCache = {};
+
+function simulateLeak() {
+  const key = "item_" + Object.keys(leakyCache).length;
+  leakyCache[key] = { data: Math.random() };
+}
+
+function simulateClean() {
+  const temp = { data: Math.random() };
+  
+}
+
+console.log("\n--- Part 3: Reachability Simulation ---");
+
+for (let i = 0; i < 5; i++) {
+  simulateLeak();
+  simulateClean();
+}
+
+console.log("leakyCache size:", Object.keys(leakyCache).length);
+console.log("Objects created in simulateClean are not accessible and are eligible for garbage collection.");
+
+function monomorphicAdd(a, b) {
+  return a + b;
+}
+
+function polymorphicAdd(a, b) {
+  return a + b;
+}
+
+console.log("\n--- Part 4: V8 Optimization ---");
+
+
+console.time("monomorphicAdd");
+for (let i = 0; i < 1_000_000; i++) {
+  monomorphicAdd(1, 2);
+}
+console.timeEnd("monomorphicAdd");
+
+console.time("polymorphicAdd");
+for (let i = 0; i < 1_000_000; i++) {
+  polymorphicAdd(1, 2);
+  polymorphicAdd("1", 2);
+  polymorphicAdd(true, 2);
+}
+console.timeEnd("polymorphicAdd");
+
+console.log(`
+Explanation:
+monomorphicAdd is faster because it consistently receives numbers, allowing V8 to optimize it using inline caches and TurboFan.
+polymorphicAdd receives mixed types, which breaks optimization and prevents efficient inline caching.
+`);
